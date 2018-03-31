@@ -1,0 +1,52 @@
+<%= form_with(model: spent, local: true) do |form| %>
+  <% if spent.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(spent.errors.count, "error") %> prohibited this spent from being saved:</h2>
+
+      <ul>
+      <% spent.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number, id: :spent_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.text_field :value, id: :spent_value %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :spent_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :closed %>
+    <%= form.check_box :closed, id: :spent_closed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :person_id %>
+    <%= form.text_field :person_id, id: :spent_person_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_id %>
+    <%= form.text_field :payment_id, id: :spent_payment_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expense_id %>
+    <%= form.text_field :expense_id, id: :spent_expense_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

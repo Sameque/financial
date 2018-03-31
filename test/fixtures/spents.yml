@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  value: 9.99
+  description: MyString
+  closed: false
+  person: one
+  payment: one
+  expense: one
+
+two:
+  number: MyString
+  value: 9.99
+  description: MyString
+  closed: false
+  person: two
+  payment: two
+  expense: two

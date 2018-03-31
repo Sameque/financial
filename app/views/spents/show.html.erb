@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @spent.number %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @spent.value %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @spent.description %>
+</p>
+
+<p>
+  <strong>Closed:</strong>
+  <%= @spent.closed %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @spent.person %>
+</p>
+
+<p>
+  <strong>Payment:</strong>
+  <%= @spent.payment %>
+</p>
+
+<p>
+  <strong>Expense:</strong>
+  <%= @spent.expense %>
+</p>
+
+<%= link_to 'Edit', edit_spent_path(@spent) %> |
+<%= link_to 'Back', spents_path %>
