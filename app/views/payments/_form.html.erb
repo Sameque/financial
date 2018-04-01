@@ -1,32 +1,48 @@
-<%= form_with(model: payment, local: true) do |form| %>
-  <% if payment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+<%= form_for @payment, :html => { :class => "form-horizontal payment" } do |f| %>
 
-      <ul>
-      <% payment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @payment.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @payment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :payment_name %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :money, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :money, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:money) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :card, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :card, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:card) %>
   </div>
 
-  <div class="field">
-    <%= form.label :money %>
-    <%= form.check_box :money, id: :payment_money %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                payments_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :card %>
-    <%= form.check_box :card, id: :payment_card %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

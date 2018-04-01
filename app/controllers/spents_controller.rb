@@ -1,10 +1,13 @@
 class SpentsController < ApplicationController
   before_action :set_spent, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: %i[edit new update create]
+  before_action :set_payments, only: %i[edit new update create]
+  before_action :set_categories, only: %i[edit new update create]
 
   # GET /spents
   # GET /spents.json
   def index
-    @spents = Spent.all
+    @spents = Spent.all.order(:date)
   end
 
   # GET /spents/1
@@ -62,6 +65,19 @@ class SpentsController < ApplicationController
   end
 
   private
+
+  def set_person
+    @people = Person.all
+  end
+
+  def set_categories
+    @categories = Category.all
+  end
+
+  def set_payments
+    @payments = Payment.all
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_spent
       @spent = Spent.find(params[:id])
@@ -69,6 +85,6 @@ class SpentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spent_params
-      params.require(:spent).permit(:number, :value, :description, :closed, :person_id, :payment_id, :expense_id)
+      params.require(:spent).permit(:number, :value, :description, :person_id, :payment_id, :date, :category_id)
     end
 end

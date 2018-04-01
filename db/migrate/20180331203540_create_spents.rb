@@ -7,7 +7,7 @@ class CreateSpents < ActiveRecord::Migration[5.1]
       t.boolean :closed
       t.references :person, foreign_key: true
       t.references :payment, foreign_key: true
-      t.references :expense, foreign_key: true
+      t.references :expense, foreign_key: true, :null => true
 
       t.timestamps
     end

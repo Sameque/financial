@@ -1,52 +1,61 @@
-<%= form_with(model: spent, local: true) do |form| %>
-  <% if spent.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(spent.errors.count, "error") %> prohibited this spent from being saved:</h2>
+<%= form_for @spent, :html => { :class => "form-horizontal spent" } do |f| %>
 
-      <ul>
-      <% spent.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @spent.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@spent.errors.count, "error") %> prohibited this spent from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @spent.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :number %>
-    <%= form.text_field :number, id: :spent_number %>
+  <div class="form-group">
+    <%= f.label :value, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :value, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :person_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.collection_select(:person_id, @people, :id, :name, {include_blank: true},{:class=>'form-control'}) %>
+    </div>
+    <%=f.error_span(:person_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :payment_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.collection_select(:payment_id, @payments, :id, :name, {include_blank: true},{:class=>'form-control'}) %>
+    </div>
+    <%=f.error_span(:payment_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.collection_select(:category_id, @categories, :id, :name, {include_blank: true},{:class=>'form-control'}) %>
+    </div>
+    <%=f.error_span(:category_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.date_select :date, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:date) %>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                spents_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :value %>
-    <%= form.text_field :value, id: :spent_value %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :spent_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :closed %>
-    <%= form.check_box :closed, id: :spent_closed %>
-  </div>
-
-  <div class="field">
-    <%= form.label :person_id %>
-    <%= form.text_field :person_id, id: :spent_person_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :payment_id %>
-    <%= form.text_field :payment_id, id: :spent_payment_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :expense_id %>
-    <%= form.text_field :expense_id, id: :spent_expense_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
