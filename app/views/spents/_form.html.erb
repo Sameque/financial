@@ -50,6 +50,15 @@
     </div>
     <%=f.error_span(:date) %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :expense_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.collection_select(:expense_id, @expenses, :id, :number, {include_blank: true},{:class=>'form-control'}) %>
+    </div>
+    <%=f.error_span(:expense_id) %>
+  </div>
+
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>

@@ -1,5 +1,6 @@
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: %i[edit new update create]
 
   # GET /expenses
   # GET /expenses.json
@@ -15,6 +16,7 @@ class ExpensesController < ApplicationController
   # GET /expenses/new
   def new
     @expense = Expense.new
+    @spents = Spent.all.order(:date).where('closed = false')
   end
 
   # GET /expenses/1/edit
@@ -62,6 +64,10 @@ class ExpensesController < ApplicationController
   end
 
   private
+    def set_person
+      @people = Person.all
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_expense
       @expense = Expense.find(params[:id])

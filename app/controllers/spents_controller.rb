@@ -1,8 +1,9 @@
 class SpentsController < ApplicationController
-  before_action :set_spent, only: [:show, :edit, :update, :destroy]
-  before_action :set_person, only: %i[edit new update create]
-  before_action :set_payments, only: %i[edit new update create]
-  before_action :set_categories, only: %i[edit new update create]
+  before_action :set_spent, only:       %i[edit update show destroy]
+  before_action :set_person, only:      %i[edit new update create]
+  before_action :set_payments, only:    %i[edit new update create]
+  before_action :set_categories, only:  %i[edit new update create]
+  before_action :set_expenses, only:    %i[edit new update create]
 
   # GET /spents
   # GET /spents.json
@@ -68,6 +69,10 @@ class SpentsController < ApplicationController
 
   def set_person
     @people = Person.all
+  end
+
+  def set_expenses
+    @expenses = Expense.all
   end
 
   def set_categories
