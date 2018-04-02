@@ -1,0 +1,38 @@
+<%- model_class = Spent -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:value) %></th>
+      <th><%= model_class.human_attribute_name(:date) %></th>
+      <th><%= model_class.human_attribute_name(:person_id) %></th>
+      <th><%= model_class.human_attribute_name(:payment_id) %></th>
+      <th><%= model_class.human_attribute_name(:category_id) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @spents.each do |spent| %>
+      <tr>
+        <td><%= link_to spent.id, spent_path(spent) %></td>
+        <td><%= spent.value %></td>
+        <td><%= spent.date %></td>
+        <td><%= spent.person_description %></td>
+        <td><%= spent.payment_description %></td>
+        <td><%= spent.category_description %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+
+  <tfoot>
+    <tr>
+
+    <td><strong>Total: </td>
+    <td colspan="5"><strong><%=  @valueSum  %></strong></td>
+    </tr>
+
+</table>

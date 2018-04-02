@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :categories
-  get 'home/index'
+  # get 'home/index'
 
   root 'home#index'
+
+  get 'report/spent'
+  resources :categories
   resources :spents
   resources :expenses
   resources :payments
