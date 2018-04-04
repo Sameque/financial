@@ -1,29 +1,27 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Expense -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Number:</strong>
-  <%= @expense.number %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:number) %>:</strong></dt>
+  <dd><%= @expense.number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value) %>:</strong></dt>
+  <dd><%= @expense.value %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @expense.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:person_id) %>:</strong></dt>
+  <dd><%= @expense.person_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:paid) %>:</strong></dt>
+  <dd><%= @expense.paid %></dd>
+</dl>
 
-<p>
-  <strong>Value:</strong>
-  <%= @expense.value %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @expense.description %>
-</p>
-
-<p>
-  <strong>References:</strong>
-  <%= @expense.references %>
-</p>
-
-<p>
-  <strong>Paid:</strong>
-  <%= @expense.paid %>
-</p>
-
-<%= link_to 'Edit', edit_expense_path(@expense) %> |
-<%= link_to 'Back', expenses_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              expenses_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_expense_path(@expense), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              expense_path(@expense),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

@@ -25,14 +25,14 @@
   <div class="form-group">
     <%= f.label :money, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :money, :class => 'form-control' %>
+      <%= f.check_box :money, :class => 'form-check-input' %>
     </div>
     <%=f.error_span(:money) %>
   </div>
   <div class="form-group">
     <%= f.label :card, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :card, :class => 'form-control' %>
+      <%= f.check_box :card, :class => 'form-check-input' %>
     </div>
     <%=f.error_span(:card) %>
   </div>
