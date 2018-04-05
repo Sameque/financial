@@ -8,7 +8,7 @@ class SpentsController < ApplicationController
   # GET /spents
   # GET /spents.json
   def index
-    @spents = Spent.all.order(:date)
+    @spents = Spent.all.order(:expense_id, :date)
   end
 
   # GET /spents/1
@@ -52,6 +52,7 @@ class SpentsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @spent.errors, status: :unprocessable_entity }
       end
+
     end
   end
 
@@ -90,6 +91,6 @@ class SpentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spent_params
-      params.require(:spent).permit(:number, :value, :description, :person_id, :payment_id, :date, :category_id)
+      params.require(:spent).permit(:number, :value, :description, :person_id, :payment_id, :date, :category_id, :expense_id)
     end
 end

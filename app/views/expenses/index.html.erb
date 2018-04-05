@@ -11,7 +11,6 @@
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:person_id) %></th>
       <th><%= model_class.human_attribute_name(:paid) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -22,9 +21,8 @@
         <td><%= expense.number %></td>
         <td><%= expense.value %></td>
         <td><%= expense.description %></td>
-        <td><%= expense.person_id %></td>
+        <td><%= expense.person_description %></td>
         <td><%= expense.paid %></td>
-        <td><%=l expense.created_at %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       expense_path(expense), :class => 'btn btn-default btn-xs' %>
