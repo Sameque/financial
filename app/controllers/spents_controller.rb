@@ -8,7 +8,7 @@ class SpentsController < ApplicationController
   # GET /spents
   # GET /spents.json
   def index
-    @spents = Spent.all.order(:date, :expense_id).paginate(page: params[:page], per_page: 15)
+    @spents = Spent.all.order(date: :desc, expense_id: :asc).paginate(page: params[:page], per_page: 15)
   end
 
   # GET /spents/1
