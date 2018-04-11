@@ -9,12 +9,12 @@ class ReportController < ApplicationController
     if params['date']
       date = Date.parse(params['date'].values.join("-"))
     else
-      date = Date.new
+      date = DateTime.now
     end
+
     @spentsAll = Spent.joins(:expense, :category).where(expenses: {competence: (date.beginning_of_month)..date.end_of_month})
 
     @spents = @spentsAll.select(:category_id, 'sum(spents.value) as sum_value').group(:category_id)
     @spentSum = @spentsAll.sum('spents.value')
   end
-
 end
