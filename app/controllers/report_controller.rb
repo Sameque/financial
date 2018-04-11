@@ -13,8 +13,8 @@ class ReportController < ApplicationController
     end
 
     @spentsAll = Spent.joins(:expense, :category).where(expenses: {competence: (date.beginning_of_month)..date.end_of_month})
-
-    @spents = @spentsAll.select(:category_id, 'sum(spents.value) as sum_value').group(:category_id)
+    @dateSelected = date
+    @spents = @spentsAll.select(:category_id, 'sum(spents.value) as sum_value').group(:category_id).order('sum(spents.value) desc')
     @spentSum = @spentsAll.sum('spents.value')
   end
 end
