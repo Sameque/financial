@@ -1,16 +1,18 @@
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
   before_action :set_person, only: %i[edit new update create]
+  before_action :set_spents, only: %i[show]
 
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.all
+    @expenses = Expense.all.paginate(page: params[:page], per_page: 8)
   end
 
   # GET /expenses/1
   # GET /expenses/1.json
   def show
+    # @spents = spent
   end
 
   # GET /expenses/new
@@ -64,8 +66,13 @@ class ExpensesController < ApplicationController
   end
 
   private
+
+    def set_spents
+      @spents =  Spent.where("expense_id = #{@expense.id}").order(:date)
+    end
+
     def set_person
-      @people = Person.all
+      @people = Person.all.order(:name)
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -75,6 +82,6 @@ class ExpensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_params
-      params.require(:expense).permit(:number, :value, :description, :references, :paid, :person_id)
+      params.require(:expense).permit(:number, :value, :description, :references, :paid, :person_id, :competence)
     end
 end

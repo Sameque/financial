@@ -5,9 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # bootstrap
 gem 'twitter-bootstrap-rails'
+# Report
+gem 'chartkick'
+# pange views
+gem 'will_paginate'
+# Page views & Bootstrap
+gem 'will_paginate-bootstrap'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'

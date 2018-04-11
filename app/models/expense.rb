@@ -9,4 +9,8 @@ class Expense < ApplicationRecord
       person.name
     end
   end
+
+  def sum_spent
+    spent.sum(:value)
+  end
 end
