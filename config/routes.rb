@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'report/spent'
   get 'report/spentCategory'
+  get 'report/expense'
 
   resources :categories
   resources :spents

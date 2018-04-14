@@ -1,0 +1,47 @@
+<%- model_class = Expense -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<%= form_tag(report_expense_path, method: :get) do %>
+<%= date_select 'date', nil, order: [:month, :year] %>
+
+  <%= submit_tag 'Pesquisar' %>
+<% end %>
+
+<h2 class="text-center"><%= @dateSelected %></h2>
+
+<div class="row">
+  <%- model_class = Spent -%>
+  <% @expenses.each do |expense| %>
+
+    <div class="col-lg-4">
+      <h4><%= expense.number %></h4>
+      <h5><%= expense.person_description %></h5>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= model_class.human_attribute_name(:category_id) %></th>
+            <th><%= model_class.human_attribute_name(:value) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% expense.spent.each do |spent| %>
+            <tr>
+              <td><%= spent.category_description %></td>
+              <td><%= spent.value %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+          <td><strong>Total: </strong></td>
+          <td colspan="2"><strong><%= expense.spent.sum(:value) %></strong></td>
+          </tr>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+
+<%# pie_chart @spentsAll.select('categories.name').group('categories.name').sum(:value), legend: true %>

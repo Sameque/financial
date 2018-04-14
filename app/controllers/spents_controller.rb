@@ -73,7 +73,7 @@ class SpentsController < ApplicationController
   end
 
   def set_expenses
-    @expenses = Expense.all.order(:number)
+    @expenses = Expense.all.order(:number).where(paid: :false)
   end
 
   def set_categories
