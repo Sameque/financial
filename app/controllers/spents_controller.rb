@@ -46,6 +46,7 @@ class SpentsController < ApplicationController
   def update
     respond_to do |format|
       if @spent.update(spent_params)
+        update_expense( @spent.expense_id)
         format.html { redirect_to @spent, notice: 'Spent was successfully updated.' }
         format.json { render :show, status: :ok, location: @spent }
       else
@@ -67,7 +68,11 @@ class SpentsController < ApplicationController
   end
 
   private
-
+  def update_expense(expense_id)
+    expense = Expense.find(expense_id)
+    expense.value = expense.spent.sum(:value)
+    expense.save
+  end
   def set_person
     @people = Person.all.order(:name)
   end
