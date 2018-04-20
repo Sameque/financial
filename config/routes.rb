@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :provisions
   root 'home#index'
 
   get 'report/spent'
