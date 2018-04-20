@@ -1,0 +1,36 @@
+<%- model_class = Category -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<%= form_tag(report_spentCategory_path, method: :get) do %>
+<%= date_select 'date', nil, order: [:month, :year] %>
+
+  <%= submit_tag 'Pesquisar' %>
+<% end %>
+
+<h2 class="text-center"><%= @dateSelected.strftime("%B") %></h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |categorie| %>
+      <tr>
+        <td><%= categorie.name %></td>
+        <td><%= categorie.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+    <td><strong>Total: </strong></td>
+    <td colspan="2"><strong><%# @provision.sum(:value) %></strong></td>
+    </tr>
+</table>
+
+<%# pie_chart @spentsAll.select('categories.name').group('categories.name').sum(:value), legend: true %>

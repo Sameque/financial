@@ -1,7 +1,21 @@
 class ReportController < ApplicationController
 
+
+  def provision
+    if params['date']
+      date = Date.parse(params['date'].values.join("-"))
+    else
+      date = DateTime.now
+    end
+    @provisions = Provision.joins(:category)
+    # @categories = Category.joins(:category)
+    # @spentsAll = Spent.joins(:expense, :category).where(expenses: {competence: (date.beginning_of_month)..date.end_of_month})
+    @dateSelected = date
+
+  end
+
   def spent
-    # @spents = Spent.all.order(:date)
+    @spents = Spent.all.order(:date)
     # @valueSum = @spents.sum(:value)
   end
 
