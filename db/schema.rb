@@ -57,6 +57,25 @@ ActiveRecord::Schema.define(version: 20180418025659) do
     t.index ["category_id"], name: "index_provisions_on_category_id"
   end
 
+  create_table "recipes", force: :cascade do |t|
+    t.string "number"
+    t.decimal "value"
+    t.string "description"
+    t.boolean "closed"
+    t.bigint "person_id"
+    t.bigint "payment_id"
+    t.bigint "expense_id"
+    t.boolean "recipe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.date "date"
+    t.index ["category_id"], name: "index_recipes_on_category_id"
+    t.index ["expense_id"], name: "index_recipes_on_expense_id"
+    t.index ["payment_id"], name: "index_recipes_on_payment_id"
+    t.index ["person_id"], name: "index_recipes_on_person_id"
+  end
+
   create_table "spents", force: :cascade do |t|
     t.string "number"
     t.decimal "value"
@@ -77,6 +96,10 @@ ActiveRecord::Schema.define(version: 20180418025659) do
 
   add_foreign_key "expenses", "people"
   add_foreign_key "provisions", "categories"
+  add_foreign_key "recipes", "categories"
+  add_foreign_key "recipes", "expenses"
+  add_foreign_key "recipes", "payments"
+  add_foreign_key "recipes", "people"
   add_foreign_key "spents", "categories"
   add_foreign_key "spents", "expenses"
   add_foreign_key "spents", "payments"

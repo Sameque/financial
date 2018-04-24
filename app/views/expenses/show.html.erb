@@ -15,6 +15,8 @@
       <dd><%= @expense.person_id %></dd>
       <dt><strong><%= model_class.human_attribute_name(:paid) %>:</strong></dt>
       <dd><%= @expense.paid %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:value) %>:</strong></dt>
+      <dd><%= @expense.value %></dd>
       <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
       <dd><%= @expense.description %></dd>
     </dl>
@@ -34,6 +36,7 @@
    <table class="table table-striped">
      <thead>
        <tr>
+         <th><%= model_spent.human_attribute_name(:id) %></th>
          <th><%= model_spent.human_attribute_name(:date) %></th>
          <th><%= model_spent.human_attribute_name(:person_id) %></th>
          <th><%= model_spent.human_attribute_name(:value) %></th>
@@ -43,6 +46,7 @@
      <tbody>
        <% @spents.each do |spent| %>
          <tr>
+           <td><%= link_to spent.id, spent_path(spent) %></td>
            <td><%= spent.date %></td>
            <td><%= spent.person_description %></td>
            <td><%= spent.value %></td>
@@ -51,5 +55,8 @@
        <% end %>
      </tbody>
    </table>
+   <%= link_to t('.new', :default => t("helpers.links.new")),
+               new_spent_path(:id => 2),
+               :class => 'btn btn-primary' %>
   </div>
 </div>

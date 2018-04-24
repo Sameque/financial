@@ -8,9 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:number) %></th>
       <th><%= model_class.human_attribute_name(:competence) %></th>
-      <th><%= model_class.human_attribute_name(:sum_spent) %></th>
       <th><%= model_class.human_attribute_name(:value) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:person_id) %></th>
       <th><%= model_class.human_attribute_name(:paid) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -22,9 +20,7 @@
         <td><%= link_to expense.id, expense_path(expense) %></td>
         <td><%= expense.number %></td>
         <td><%= expense.competence %></td>
-        <td><%= expense.sum_spent %></td>
         <td><%= expense.value %></td>
-        <td><%= expense.description %></td>
         <td><%= expense.person_description %></td>
         <td><%= expense.paid %></td>
         <td>

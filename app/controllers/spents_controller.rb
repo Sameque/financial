@@ -18,7 +18,14 @@ class SpentsController < ApplicationController
 
   # GET /spents/new
   def new
-    @spent = Spent.new
+
+    if params[:id].blank?
+      @spent = Spent.new
+      @spent.expense_id = 0      
+    else
+      @spent = Spent.new
+      @spent.expense_id = params[:id]
+    end
   end
 
   # GET /spents/1/edit
@@ -32,6 +39,7 @@ class SpentsController < ApplicationController
 
     respond_to do |format|
       if @spent.save
+        update_expense( @spent.expense_id)
         format.html { redirect_to @spent, notice: 'Spent was successfully created.' }
         format.json { render :show, status: :created, location: @spent }
       else
@@ -61,6 +69,7 @@ class SpentsController < ApplicationController
   # DELETE /spents/1.json
   def destroy
     @spent.destroy
+    update_expense( @spent.expense_id)
     respond_to do |format|
       format.html { redirect_to spents_url, notice: 'Spent was successfully destroyed.' }
       format.json { head :no_content }
@@ -68,26 +77,26 @@ class SpentsController < ApplicationController
   end
 
   private
-  def update_expense(expense_id)
-    expense = Expense.find(expense_id)
-    expense.value = expense.spent.sum(:value)
-    expense.save
-  end
-  def set_person
-    @people = Person.all.order(:name)
-  end
+    def update_expense(expense_id)
+      expense = Expense.find(expense_id)
+      expense.value = expense.spent.sum(:value)
+      expense.save
+    end
+    def set_person
+      @people = Person.all.order(:name)
+    end
 
-  def set_expenses
-    @expenses = Expense.all.order(:number).where(paid: :false)
-  end
+    def set_expenses
+      @expenses = Expense.all.order(:number).where(paid: :false)
+    end
 
-  def set_categories
-    @categories = Category.all.order(:name)
-  end
+    def set_categories
+      @categories = Category.all.order(:name)
+    end
 
-  def set_payments
-    @payments = Payment.all
-  end
+    def set_payments
+      @payments = Payment.all
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_spent
