@@ -18,6 +18,7 @@ class SpentsController < ApplicationController
 
   # GET /spents/new
   def new
+    @spent = Spent.new
   end
 
   # GET /spents/1/edit
@@ -70,12 +71,15 @@ class SpentsController < ApplicationController
 
   private
     def update_expense(expense_id)
-      if (expense_id.blank?)!
+      # if expense_id.blank?
+      #
+      # else
         expense = Expense.find(expense_id)
         expense.value = expense.spent.sum(:value)
         expense.save
-      end
+      # end
     end
+
     def set_person
       @people = Person.all.order(:name)
     end
