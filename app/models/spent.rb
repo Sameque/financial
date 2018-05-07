@@ -7,7 +7,7 @@ class Spent < ApplicationRecord
   def category_description
     if category.blank?
       ''
-    else
+  else
       category.name
     end
   end

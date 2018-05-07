@@ -1,4 +1,4 @@
-<%- model_class = Category -%>
+<%- model_class = Spent -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
@@ -14,22 +14,22 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:category_id) %></th>
+      <th><%= model_class.human_attribute_name(:value) %></th>
     </tr>
   </thead>
   <tbody>
-    <% @categories.each do |categorie| %>
+    <% @spents.each do |spent| %>
       <tr>
-        <td><%= categorie.name %></td>
-        <td><%= categorie.name %></td>
+        <td><%= spent.category_description %></td>
+        <td><%= spent.sum_value %></td>
       </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
     <td><strong>Total: </strong></td>
-    <td colspan="2"><strong><%# @provision.sum(:value) %></strong></td>
+    <td colspan="2"><strong><%= @spents.sum('spents.value').to_json.sum(10) %></strong></td>
     </tr>
 </table>
 
