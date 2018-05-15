@@ -103,6 +103,6 @@ class SpentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spent_params
-      params.require(:spent).permit(:number, :value, :description, :person_id, :date, :category_id, :expense_id)
+      params.require(:spent).permit(:number, :value, :description, :payment_id, :person_id, :date, :category_id, :expense_id)
     end
 end
