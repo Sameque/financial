@@ -43,5 +43,6 @@
   <% end %>
 </div>
 
+<h2 class="text-center"><%= @expenses.sum(:value) %></h2>
 
 <%# pie_chart @spentsAll.select('categories.name').group('categories.name').sum(:value), legend: true %>

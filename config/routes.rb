@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :provisions
+
   root 'home#index'
 
   get 'report/spent'
@@ -9,7 +10,10 @@ Rails.application.routes.draw do
   get 'report/provision'
 
   resources :categories
+  get 'spents/clone/:id', to: 'spents#clone', as: 'spents_clone'
   resources :spents
+  # get '/spents/clone/:id', to: 'spents#clone'
+  # post 'spents/clone/', to: 'spents#clone', as: 'spents_clone'
   resources :expenses
   resources :payments
   resources :people

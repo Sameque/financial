@@ -33,3 +33,7 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+<%= link_to t('.clone', :default => t("helpers.links.clone")),
+              spents_clone_path(@spent.id),
+              :method => 'get',
+               :class => 'btn btn-primary' %>

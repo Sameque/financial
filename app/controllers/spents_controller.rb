@@ -1,9 +1,9 @@
 class SpentsController < ApplicationController
-  before_action :set_spent, only:       %i[edit update show destroy]
-  before_action :set_person, only:      %i[edit new update create]
-  before_action :set_payments, only:    %i[edit new update create]
-  before_action :set_categories, only:  %i[edit new update create]
-  before_action :set_expenses, only:    %i[edit new update create]
+  before_action :set_spent, only:       %i[clone edit update show destroy]
+  before_action :set_person, only:      %i[clone edit new update create]
+  before_action :set_payments, only:    %i[clone edit new update create]
+  before_action :set_categories, only:  %i[clone edit new update create]
+  before_action :set_expenses, only:    %i[clone edit new update create]
 
   # GET /spents
   # GET /spents.json
@@ -23,6 +23,11 @@ class SpentsController < ApplicationController
 
   # GET /spents/1/edit
   def edit
+  end
+
+  def clone
+     @spent = Spent.new(@spent.attributes)
+     @spent.id  = nil
   end
 
   # POST /spents
@@ -54,7 +59,6 @@ class SpentsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @spent.errors, status: :unprocessable_entity }
       end
-
     end
   end
 
@@ -62,7 +66,7 @@ class SpentsController < ApplicationController
   # DELETE /spents/1.json
   def destroy
     @spent.destroy
-    update_expense( @spent.expense_id)
+    update_expense(@spent.expense_id)
     respond_to do |format|
       format.html { redirect_to spents_url, notice: 'Spent was successfully destroyed.' }
       format.json { head :no_content }
@@ -103,6 +107,6 @@ class SpentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spent_params
-      params.require(:spent).permit(:number, :value, :description, :payment_id, :person_id, :date, :category_id, :expense_id)
+      params.require(:spent).permit(:number, :value, :description, :closed, :payment_id, :person_id, :date, :category_id, :expense_id)
     end
 end

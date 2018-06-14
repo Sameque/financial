@@ -1,5 +1,4 @@
 <%= form_for @spent, :html => { :class => "form-horizontal spent" } do |f| %>
-
   <% if @spent.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -36,6 +35,7 @@
     </div>
     <%=f.error_span(:payment_id) %>
   </div>
+
   <div class="form-group">
     <%= f.label :category_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
@@ -43,12 +43,21 @@
     </div>
     <%=f.error_span(:category_id) %>
   </div>
+
   <div class="form-group">
     <%= f.label :date, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.date_select :date, :class => 'form-control' %>
     </div>
     <%=f.error_span(:date) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :closed, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :closed, :class => 'form-check-input' %>
+    </div>
+    <%=f.error_span(:closed) %>
   </div>
 
   <div class="form-group">
