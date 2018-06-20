@@ -75,6 +75,6 @@ class ProvisionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def provision_params
-      params.require(:provision).permit(:category_id, :value)
+      params.require(:provision).permit(:category_id, :value, :due)
     end
 end

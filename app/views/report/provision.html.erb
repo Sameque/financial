@@ -1,4 +1,4 @@
-<%- model_class = Spent -%>
+<%- model_class = Provision -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
@@ -11,6 +11,9 @@
 
 <h2 class="text-center"><%= @dateSelected.strftime("%B") %></h2>
 
+<%= @provisions.select(:id).to_param %>
+<%# Spent.where(id: in (@provisions.select(:id).to_param)) %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,17 +22,17 @@
     </tr>
   </thead>
   <tbody>
-    <% @spents.each do |spent| %>
+    <% @provisions.each do |provision| %>
       <tr>
-        <td><%= spent.category_description %></td>
-        <td><%= spent.sum_value %></td>
+        <td><%= provision.category_description %></td>
+        <td><%= provision.value %></td>
       </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
     <td><strong>Total: </strong></td>
-    <td colspan="2"><strong><%= @spents.sum('spents.value').to_json.sum(10) %></strong></td>
+    <td colspan="2"><strong><%= @provisions.sum(:value) %></strong></td>
     </tr>
 </table>
 

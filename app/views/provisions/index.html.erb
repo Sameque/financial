@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:due) %></th>
       <th><%= model_class.human_attribute_name(:category_id) %></th>
       <th><%= model_class.human_attribute_name(:value) %></th>
       <th><%= model_class.human_attribute_name(:used) %></th>
@@ -16,6 +17,7 @@
     <% @provisions.each do |provision| %>
       <tr>
         <td><%= link_to provision.id, provision_path(provision) %></td>
+        <td><%= provision.due %></td>
         <td><%= provision.category_description %></td>
         <td><%= provision.value %></td>
         <td><%= provision.used %></td>
